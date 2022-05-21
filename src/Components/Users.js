@@ -1,27 +1,23 @@
 import React from "react";
-import { useState, useEffect } from "react";
 
-export const Users = () => {
-  const [data, setData] = useState([]);
-  const [item, setItem] = useState([]);
 
-  useEffect(() => {
-    fetch(" https://jsonplaceholder.typicode.com/users")
-      .then((e) => e.json())
-      .then((e) => setData(e));
-  });
-
-  useEffect(() => {
-    for (let i of data) {
-      return setItem(i.name);
-    }
-    console.log(item);
-  }, [data]);
+const Users = ({ data }) => {
+  
+ 
 
   return (
-    <div>
-      <a> Users list</a>
-      <p>{item}</p>
+    <div className="userslist">
+      <select name="users" className="users">
+      <option defaultValue hidden className="opt">User List</option>
+        <optgroup label="Choose One"> 
+      
+          {data.map((e) => {
+            return <option key={e.id}>{e.name}  {e.email}</option>;
+          })}
+        </optgroup>
+      </select>
     </div>
   );
 };
+
+export default Users;
